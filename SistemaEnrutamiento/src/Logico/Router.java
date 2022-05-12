@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 public class Router {
 	
+	private String nombreRuter;
 	private ArrayList<Red> misRedes;
 	private ArrayList<String> nextHops;
 	private ArrayList<String> interfaces;
 	
-	public Router() {
+	public Router(String nombreRuter) {
+		this.nombreRuter = nombreRuter;
 		this.misRedes = new ArrayList<Red>();
 		this.nextHops = new ArrayList<String>();
 		this.interfaces = new ArrayList<String>();
@@ -20,6 +22,14 @@ public class Router {
 
 	public void setMisRedes(ArrayList<Red> misRedes) {
 		this.misRedes = misRedes;
+	}
+
+	public String getNombreRuter() {
+		return nombreRuter;
+	}
+
+	public void setNombreRuter(String nombreRuter) {
+		this.nombreRuter = nombreRuter;
 	}
 
 	public ArrayList<String> getNextHops() {

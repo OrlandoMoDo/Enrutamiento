@@ -9,6 +9,9 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import Logico.SistemaEnrutamiento;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -61,28 +64,7 @@ public class FrmEnrutamiento extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			ArrayList<String> redes = new ArrayList<String>();
-			redes.add("");
-			redes.add("");
-			redes.add("");
-			redes.add("");
-			redes.add("");
-			redes.add("");
-			redes.add("");
-			ArrayList<String> mascaraRedes = new ArrayList<String>();
-			mascaraRedes.add("");
-			mascaraRedes.add("");
-			mascaraRedes.add("");
-			mascaraRedes.add("");
-			mascaraRedes.add("");
-			mascaraRedes.add("");
-			mascaraRedes.add("");
-			ArrayList<String> gateways = new ArrayList<String>();
-			gateways.add("");
-			gateways.add("");
-			gateways.add("");
-			gateways.add("");
-			FrmEnrutamiento dialog = new FrmEnrutamiento(redes, mascaraRedes, gateways);
+			FrmEnrutamiento dialog = new FrmEnrutamiento();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -93,10 +75,7 @@ public class FrmEnrutamiento extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public FrmEnrutamiento(ArrayList<String> redesAux, ArrayList<String> mascaraRedesAux, ArrayList<String> gatewaysAux) {
-		redes = redesAux;
-		mascaraRedes = mascaraRedesAux;
-		gateways = gatewaysAux;
+	public FrmEnrutamiento() {
 		
 		setTitle("Tabla de enrutamiento - R2");
 		setModal(true);
@@ -308,41 +287,14 @@ public class FrmEnrutamiento extends JDialog {
 		
 		if(opcion==0) {
 			for(int i=0; i<4; i++) {
-				if(i==0) {
-					row[0] = redes.get(0);
-					row[1] = mascaraRedes.get(0);
-					row[2] = "Conectada";
-					row[3] = "NA";
-					row[4] = "e0/0";
-					row[5] = "0";
-					row[6] = "1";
-				}else if(i==1) {
-					row[0] = redes.get(2);
-					row[1] = mascaraRedes.get(2);
-					row[2] = "Conectada";
-					row[3] = "NA";
-					row[4] = "e0/2";
-					row[5] = "0";
-					row[6] = "1";
-				}else if(i==2){
-					row[0] = redes.get(3);
-					row[1] = mascaraRedes.get(3);
-					row[2] = "Conectada";
-					row[3] = "NA";
-					row[4] = "e0/3";
-					row[5] = "0";
-					row[6] = "1";
-				}else {
-					row[0] = redes.get(6);
-					row[1] = mascaraRedes.get(6);
-					row[2] = "Conectada";
-					row[3] = "NA";
-					row[4] = "e0/1";
-					row[5] = "0";
-					row[6] = "1";
-				}
+				row[0] = SistemaEnrutamiento.getInstance().getMisRouters().get(0).getMisRedes().get(i).getDireccionIp();
+				row[1] = SistemaEnrutamiento.getInstance().getMisRouters().get(0).getMisRedes().get(i).getMascara();
+				row[2] = "Conectada";
+				row[3] = "NA";
+				row[4] = SistemaEnrutamiento.getInstance().getMisRouters().get(0).getInterfaces().get(i);
+				row[5] = "0";
+				row[6] = "1";				
 				modeloTabla.addRow(row);
-	
 			}
 		}
 

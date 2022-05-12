@@ -49,5 +49,9 @@ public class Red {
 	public void setMascara(int mascara) {
 		this.mascara = mascara;
 	}
+	public String getDireccionIp() {
+		String direccion = primerOcteto+"."+segundoOcteto+"."+tercerOcteto+"."+cuartoOcteto;
+		return direccion;
+	}
 
 }

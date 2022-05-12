@@ -8,6 +8,11 @@ import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Logico.Red;
+import Logico.Router;
+import Logico.SistemaEnrutamiento;
+
 import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 
@@ -113,6 +118,7 @@ public class FrmPrincipal extends JFrame {
 				mascaraRedes.clear();
 				gateways.clear();
 				if(camposLlenos()) {
+					Router routerIngresar = new Router("R-2");
 					for(int i=0; i<4; i++) {
 						int ip;
 						switch (i) {
@@ -120,47 +126,82 @@ public class FrmPrincipal extends JFrame {
 							ip = calcularIpGateway(txtRedA);
 							lblIpGatewayRedA.setText("."+ip);
 							lblIpGatewayRedA.setVisible(true);
+							routerIngresar.ingresarNextHop("."+ip);
+							routerIngresar.ingresarInterfaces("e0/0");
 							break;
 							
 						case 1:
 							ip = calcularIpGateway(txtRedC);
 							lblIpGatewayRedC.setText("."+ip);
 							lblIpGatewayRedC.setVisible(true);
+							routerIngresar.ingresarNextHop("."+ip);
+							routerIngresar.ingresarInterfaces("e0/2");
 							break;
 						
 						case 2:
 							ip = calcularIpGateway(txtRedD);
 							lblIpGatewayRedD.setText("."+ip);
 							lblIpGatewayRedD.setVisible(true);
+							routerIngresar.ingresarNextHop("."+ip);
+							routerIngresar.ingresarInterfaces("e0/3");
 							break;
 						
 						case 3:
 							ip = calcularIpGateway(txtRedG);
 							lblIpGatewayRedG.setText("."+ip);
 							lblIpGatewayRedG.setVisible(true);
+							routerIngresar.ingresarNextHop("."+ip);
+							routerIngresar.ingresarInterfaces("e0/1");
 							break;
 						}
 					}
 					
 					btnSiguiente.setEnabled(true);
-					redes.add(txtRedA.getText());
-					redes.add(txtRedB.getText());
-					redes.add(txtRedC.getText());
-					redes.add(txtRedD.getText());
-					redes.add(txtRedE.getText());
-					redes.add(txtRedF.getText());
-					redes.add(txtRedG.getText());
-					mascaraRedes.add(txtMaskA.getText());
-					mascaraRedes.add(txtMaskB.getText());
-					mascaraRedes.add(txtMaskC.getText());
-					mascaraRedes.add(txtMaskD.getText());
-					mascaraRedes.add(txtMaskE.getText());
-					mascaraRedes.add(txtMaskF.getText());
-					mascaraRedes.add(txtMaskG.getText());
-					gateways.add(lblIpGatewayRedA.getText());
-					gateways.add(lblIpGatewayRedC.getText());
-					gateways.add(lblIpGatewayRedD.getText());
-					gateways.add(lblIpGatewayRedG.getText());
+					ArrayList<Integer> octetos = new ArrayList<Integer>();
+					char[] chars = txtRedA.getText().toCharArray();
+					int mask;
+					for(int i=0; i<7; i++) {
+						mask=0;
+						String octeto = "";
+						octetos.clear();
+
+						switch (i) {
+							case 0: chars = txtRedA.getText().toCharArray(); mask=Integer.parseInt(txtMaskA.getText()); break;
+							case 1: chars = txtRedB.getText().toCharArray(); mask=Integer.parseInt(txtMaskB.getText()); break;
+							case 2: chars = txtRedC.getText().toCharArray(); mask=Integer.parseInt(txtMaskC.getText()); break;
+							case 3: chars = txtRedD.getText().toCharArray(); mask=Integer.parseInt(txtMaskD.getText()); break;
+							case 4: chars = txtRedE.getText().toCharArray(); mask=Integer.parseInt(txtMaskE.getText()); break;
+							case 5: chars = txtRedF.getText().toCharArray(); mask=Integer.parseInt(txtMaskF.getText()); break;
+							case 6: chars = txtRedG.getText().toCharArray(); mask=Integer.parseInt(txtMaskG.getText()); break;
+						}
+						int conteoPuntos = 0;
+						for(char ch: chars) {
+							if((ch!='.') && conteoPuntos==3) {
+								JOptionPane.showMessageDialog(null, "BOBO"+octeto);
+
+								octeto =octeto+ch;
+							}else {
+								JOptionPane.showMessageDialog(null, octeto);
+
+								int octetoInt = Integer.parseInt(octeto);
+								octetos.add(octetoInt);
+								conteoPuntos++;
+								octeto="";
+							}
+						}
+						
+						Red redIngresar = new Red(octetos.get(0), octetos.get(1), octetos.get(2), octetos.get(3), mask);
+						switch (i) {
+							case 0: routerIngresar.ingresarRed(redIngresar); break;
+							case 2: routerIngresar.ingresarRed(redIngresar); break;
+							case 3: routerIngresar.ingresarRed(redIngresar); break;
+							case 6: routerIngresar.ingresarRed(redIngresar); break;
+						}
+						SistemaEnrutamiento.getInstance().ingresarRed(redIngresar);
+					}
+					SistemaEnrutamiento.getInstance().ingresarRouter(routerIngresar);
+
+					
 					
 				}else {
 					JOptionPane.showMessageDialog(null, "Llene todos los campos");
@@ -378,7 +419,7 @@ public class FrmPrincipal extends JFrame {
 		btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FrmEnrutamiento frmAux = new FrmEnrutamiento(redes, mascaraRedes, gateways);
+				FrmEnrutamiento frmAux = new FrmEnrutamiento();
 				frmAux.setVisible(true);
 				//pnTopologia
 			}
