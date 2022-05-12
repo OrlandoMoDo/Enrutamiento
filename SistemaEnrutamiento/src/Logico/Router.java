@@ -8,12 +8,22 @@ public class Router {
 	private ArrayList<Red> misRedes;
 	private ArrayList<String> nextHops;
 	private ArrayList<String> interfaces;
+	private ArrayList<Enrutamiento> enrutamientos;
 	
 	public Router(String nombreRuter) {
 		this.nombreRuter = nombreRuter;
 		this.misRedes = new ArrayList<Red>();
 		this.nextHops = new ArrayList<String>();
 		this.interfaces = new ArrayList<String>();
+		this.enrutamientos = new ArrayList<Enrutamiento>();
+	}
+
+	public ArrayList<Enrutamiento> getEnrutamientos() {
+		return enrutamientos;
+	}
+
+	public void setEnrutamientos(ArrayList<Enrutamiento> enrutamientos) {
+		this.enrutamientos = enrutamientos;
 	}
 
 	public ArrayList<Red> getMisRedes() {
@@ -52,6 +62,10 @@ public class Router {
 			
 			misRedes.add(redIngresar);
 			
+	}
+	
+	public void ingresarEnrutamiento(Enrutamiento enrutamientoAux) {
+		enrutamientos.add(enrutamientoAux);
 	}
 		
 	public void ingresarNextHop(String nextHopIngresar) {

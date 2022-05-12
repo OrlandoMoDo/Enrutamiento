@@ -53,5 +53,9 @@ public class Red {
 		String direccion = primerOcteto+"."+segundoOcteto+"."+tercerOcteto+"."+cuartoOcteto;
 		return direccion;
 	}
+	public String getDireccionIpMask() {
+		String direccion = primerOcteto+"."+segundoOcteto+"."+tercerOcteto+"."+cuartoOcteto+"/"+mascara;
+		return direccion;
+	}
 
 }

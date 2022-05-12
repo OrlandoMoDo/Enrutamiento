@@ -30,9 +30,6 @@ public class FrmPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	ArrayList<String> redes;
-	ArrayList<String> mascaraRedes;
-	ArrayList<String> gateways;
 
 	
 	//Tamaño de la topologia:
@@ -88,9 +85,6 @@ public class FrmPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmPrincipal() {
-		redes = new ArrayList<String>();
-		mascaraRedes = new ArrayList<String>();
-		gateways = new ArrayList<String>();
 		
 		setBackground(Color.WHITE);
 		setResizable(false);
@@ -114,9 +108,6 @@ public class FrmPrincipal extends JFrame {
 		btnComprobar = new JButton("Comprobar");
 		btnComprobar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				redes.clear();
-				mascaraRedes.clear();
-				gateways.clear();
 				if(camposLlenos()) {
 					Router routerIngresar = new Router("R-2");
 					for(int i=0; i<4; i++) {
@@ -419,6 +410,8 @@ public class FrmPrincipal extends JFrame {
 		btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+
 				FrmEnrutamiento frmAux = new FrmEnrutamiento();
 				frmAux.setVisible(true);
 				//pnTopologia
