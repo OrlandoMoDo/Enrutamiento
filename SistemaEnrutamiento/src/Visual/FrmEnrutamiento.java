@@ -27,6 +27,7 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
 
 public class FrmEnrutamiento extends JDialog {
 
@@ -79,6 +80,9 @@ public class FrmEnrutamiento extends JDialog {
 			router.ingresarInterfaces("E0/2");
 			router.ingresarInterfaces("E0/3");
 			router.ingresarNextHop("10.0.0.1");
+			router.ingresarNextHop("10.0.0.2");
+			router.ingresarNextHop("10.0.0.3");
+			router.ingresarNextHop("10.0.0.4");
 			SistemaEnrutamiento.getInstance().ingresarRouter(router);
 			
 			FrmEnrutamiento dialog = new FrmEnrutamiento();
@@ -161,6 +165,7 @@ public class FrmEnrutamiento extends JDialog {
 			pnRuta.add(lblNewLabel_2);
 			
 			cbxEnrutamiento = new JComboBox();
+			cbxEnrutamiento.setModel(new DefaultComboBoxModel(new String[] {"<<Estatico>>", "<<RIP>>", "<<EIGRP>>", "<<OSPF>>", "<<IGRP>>"}));
 			cbxEnrutamiento.setBounds(125, 69, 187, 26);
 			pnRuta.add(cbxEnrutamiento);
 			
@@ -190,7 +195,11 @@ public class FrmEnrutamiento extends JDialog {
 			lblNextHop.setBounds(15, 118, 101, 20);
 			pnRuta.add(lblNextHop);
 			
-			cbxNextHop = new JComboBox();
+			String nextHopArray[] = new String[4];
+			for (int i = 0; i < 4; i++) {
+				nextHopArray[i] = SistemaEnrutamiento.getInstance().getMisRouters().get(0).getNextHops().get(i);
+			}
+			cbxNextHop = new JComboBox(nextHopArray);
 			cbxNextHop.setBounds(125, 115, 187, 26);
 			pnRuta.add(cbxNextHop);
 			
