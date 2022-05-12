@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import Logico.Red;
+import Logico.Router;
 import Logico.SistemaEnrutamiento;
 
 import javax.swing.JScrollPane;
@@ -64,6 +66,23 @@ public class FrmEnrutamiento extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
+			Red red = null;
+			for (int i = 0; i < 7; i++) {
+				red = new Red(i, i+1, i+2, i+3, i+4);
+				SistemaEnrutamiento.getInstance().ingresarRed(red);
+			}
+			Router router = new Router("R1");
+			router.ingresarInterfaces("E0/1");
+			router.ingresarInterfaces("E0/1");
+			router.ingresarInterfaces("E0/2");
+			router.ingresarInterfaces("E0/3");
+			router.ingresarNextHop("10.0.0.1");
+			router.ingresarRed(red);
+			router.ingresarRed(red);
+			router.ingresarRed(red);
+			router.ingresarRed(red);
+			SistemaEnrutamiento.getInstance().ingresarRouter(router);
+			
 			FrmEnrutamiento dialog = new FrmEnrutamiento();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
@@ -92,6 +111,7 @@ public class FrmEnrutamiento extends JDialog {
 			pnTablaEnrutamiento.setLayout(new BorderLayout(0, 0));
 			{
 				scrlTablaEnrutamiento = new JScrollPane();
+				scrlTablaEnrutamiento.setEnabled(false);
 				scrlTablaEnrutamiento.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 				pnTablaEnrutamiento.add(scrlTablaEnrutamiento, BorderLayout.CENTER);
 				
@@ -103,6 +123,7 @@ public class FrmEnrutamiento extends JDialog {
 		modeloTabla = new DefaultTableModel();
 		String[] headers = { "Destino", "Mascara", "C - R", "Next Hoop", "Interfaz", "Dist. Admn.", "Metrica"};
 		modeloTabla.setColumnIdentifiers(headers);//Estos seran los encabezados de las columnas.
+		
 		tblTablaEnrutamiento.setModel(modeloTabla);	
 		tblTablaEnrutamiento.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -300,3 +321,4 @@ public class FrmEnrutamiento extends JDialog {
 
 	}
 }
+

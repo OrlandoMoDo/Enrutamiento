@@ -13,7 +13,6 @@ import Logico.Red;
 import Logico.Router;
 import Logico.SistemaEnrutamiento;
 
-import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 
 import java.awt.Color;
@@ -29,6 +28,7 @@ import java.awt.event.ActionEvent;
 
 public class FrmPrincipal extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	ArrayList<String> redes;
 	ArrayList<String> mascaraRedes;
@@ -155,7 +155,13 @@ public class FrmPrincipal extends JFrame {
 							break;
 						}
 					}
-					
+					txtRedA.setText(txtRedA.getText()+'.');
+					txtRedB.setText(txtRedB.getText()+'.');
+					txtRedC.setText(txtRedC.getText()+'.');
+					txtRedD.setText(txtRedD.getText()+'.');
+					txtRedE.setText(txtRedE.getText()+'.');
+					txtRedF.setText(txtRedF.getText()+'.');
+					txtRedG.setText(txtRedG.getText()+'.');
 					btnSiguiente.setEnabled(true);
 					ArrayList<Integer> octetos = new ArrayList<Integer>();
 					char[] chars = txtRedA.getText().toCharArray();
@@ -174,18 +180,16 @@ public class FrmPrincipal extends JFrame {
 							case 5: chars = txtRedF.getText().toCharArray(); mask=Integer.parseInt(txtMaskF.getText()); break;
 							case 6: chars = txtRedG.getText().toCharArray(); mask=Integer.parseInt(txtMaskG.getText()); break;
 						}
-						int conteoPuntos = 0;
 						for(char ch: chars) {
-							if((ch!='.') && conteoPuntos==3) {
-								JOptionPane.showMessageDialog(null, "BOBO"+octeto);
+							if((ch!='.')) {
+								JOptionPane.showMessageDialog(null, "BOBO: "+octeto);
 
-								octeto =octeto+ch;
+								octeto = octeto+ch;
 							}else {
 								JOptionPane.showMessageDialog(null, octeto);
 
 								int octetoInt = Integer.parseInt(octeto);
 								octetos.add(octetoInt);
-								conteoPuntos++;
 								octeto="";
 							}
 						}
