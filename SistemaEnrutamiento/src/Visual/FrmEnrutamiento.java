@@ -30,15 +30,13 @@ import java.awt.event.ActionEvent;
 
 public class FrmEnrutamiento extends JDialog {
 
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JPanel pnTablaEnrutamiento;
 	private JScrollPane scrlTablaEnrutamiento;
 	private JTable tblTablaEnrutamiento;
 	private static DefaultTableModel modeloTabla;
 	private static Object[] row;//Arreglo de objeto.
-	ArrayList<String> redes;
-	ArrayList<String> mascaraRedes;
-	ArrayList<String> gateways;
 	private JButton btnSalir;
 	private JButton btnModificar;
 	private JButton btnAgregar;
@@ -67,20 +65,20 @@ public class FrmEnrutamiento extends JDialog {
 	public static void main(String[] args) {
 		try {
 			Red red = null;
+			Router router = new Router("R1");
+
 			for (int i = 0; i < 7; i++) {
 				red = new Red(i, i+1, i+2, i+3, i+4);
 				SistemaEnrutamiento.getInstance().ingresarRed(red);
+				if(i<4) {
+					router.ingresarRed(red);
+				}
 			}
-			Router router = new Router("R1");
 			router.ingresarInterfaces("E0/1");
 			router.ingresarInterfaces("E0/1");
 			router.ingresarInterfaces("E0/2");
 			router.ingresarInterfaces("E0/3");
 			router.ingresarNextHop("10.0.0.1");
-			router.ingresarRed(red);
-			router.ingresarRed(red);
-			router.ingresarRed(red);
-			router.ingresarRed(red);
 			SistemaEnrutamiento.getInstance().ingresarRouter(router);
 			
 			FrmEnrutamiento dialog = new FrmEnrutamiento();
@@ -95,6 +93,7 @@ public class FrmEnrutamiento extends JDialog {
 	 * Create the dialog.
 	 */
 	public FrmEnrutamiento() {
+		setResizable(false);
 		
 		setTitle("Tabla de enrutamiento - R2");
 		setModal(true);
@@ -144,7 +143,16 @@ public class FrmEnrutamiento extends JDialog {
 				pnRuta.add(lblNewLabel_1);
 			}
 			
-			cbxRedes = new JComboBox();
+			String redesArray[] = new String[3];
+			int aux = 0;
+			for (int i = 0; i < SistemaEnrutamiento.getInstance().getMisRedes().size(); i++) {
+				
+				if(i!=0 && i!=2 && i!=3 && i!=6) {
+					redesArray[aux] = SistemaEnrutamiento.getInstance().getMisRedes().get(i).getDireccionIp()+"/"+SistemaEnrutamiento.getInstance().getMisRedes().get(i).getMascara();
+					aux++;
+				}
+			}
+			cbxRedes = new JComboBox(redesArray);
 			cbxRedes.setBounds(125, 27, 187, 26);
 			pnRuta.add(cbxRedes);
 			

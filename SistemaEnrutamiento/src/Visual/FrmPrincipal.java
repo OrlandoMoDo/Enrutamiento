@@ -182,12 +182,8 @@ public class FrmPrincipal extends JFrame {
 						}
 						for(char ch: chars) {
 							if((ch!='.')) {
-								JOptionPane.showMessageDialog(null, "BOBO: "+octeto);
-
 								octeto = octeto+ch;
 							}else {
-								JOptionPane.showMessageDialog(null, octeto);
-
 								int octetoInt = Integer.parseInt(octeto);
 								octetos.add(octetoInt);
 								octeto="";
