@@ -25,6 +25,8 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class FrmPrincipal extends JFrame {
 
@@ -227,6 +229,15 @@ public class FrmPrincipal extends JFrame {
 		pnTopologia.add(lblIpGatewayRedC);
 		
 		txtRedG = new JTextField();
+		txtRedG.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if((!Character.isDigit(c)&&(c!='.'))||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE)) {
+					e.consume();
+				}
+			}
+		});
 		txtRedG.setColumns(10);
 		txtRedG.setBounds(288, 226, 109, 26);
 		pnTopologia.add(txtRedG);
@@ -241,6 +252,15 @@ public class FrmPrincipal extends JFrame {
 		pnTopologia.add(label_7);
 		
 		txtMaskG = new JTextField();
+		txtMaskG.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if((!Character.isDigit(c))||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE)) {
+					e.consume();
+				}
+			}
+		});
 		txtMaskG.setColumns(10);
 		txtMaskG.setBounds(406, 226, 33, 26);
 		pnTopologia.add(txtMaskG);
@@ -255,16 +275,43 @@ public class FrmPrincipal extends JFrame {
 		pnTopologia.add(lblRedF);
 		
 		txtRedF = new JTextField();
+		txtRedF.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if((!Character.isDigit(c)&&(c!='.'))||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE)) {
+					e.consume();
+				}
+			}
+		});
 		txtRedF.setColumns(10);
 		txtRedF.setBounds(465, 270, 109, 26);
 		pnTopologia.add(txtRedF);
 		
 		txtMaskF = new JTextField();
+		txtMaskF.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if((!Character.isDigit(c))||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE)) {
+					e.consume();
+				}
+			}
+		});
 		txtMaskF.setColumns(10);
 		txtMaskF.setBounds(584, 270, 33, 26);
 		pnTopologia.add(txtMaskF);
 		
 		txtMaskE = new JTextField();
+		txtMaskE.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if((!Character.isDigit(c))||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE)) {
+					e.consume();
+				}
+			}
+		});
 		txtMaskE.setColumns(10);
 		txtMaskE.setBounds(363, 370, 33, 26);
 		pnTopologia.add(txtMaskE);
@@ -279,11 +326,29 @@ public class FrmPrincipal extends JFrame {
 		pnTopologia.add(label_5);
 		
 		txtRedE = new JTextField();
+		txtRedE.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if((!Character.isDigit(c)&&(c!='.'))||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE)) {
+					e.consume();
+				}
+			}
+		});
 		txtRedE.setColumns(10);
 		txtRedE.setBounds(244, 370, 109, 26);
 		pnTopologia.add(txtRedE);
 		
 		txtMaskD = new JTextField();
+		txtMaskD.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if((!Character.isDigit(c))||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE)) {
+					e.consume();
+				}
+			}
+		});
 		txtMaskD.setColumns(10);
 		txtMaskD.setBounds(121, 272, 33, 26);
 		pnTopologia.add(txtMaskD);
@@ -298,6 +363,15 @@ public class FrmPrincipal extends JFrame {
 		pnTopologia.add(lblRedD);
 		
 		txtRedD = new JTextField();
+		txtRedD.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if((!Character.isDigit(c)&&(c!='.'))||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE)) {
+					e.consume();
+				}
+			}
+		});
 		txtRedD.setColumns(10);
 		txtRedD.setBounds(2, 272, 109, 26);
 		pnTopologia.add(txtRedD);
@@ -312,21 +386,57 @@ public class FrmPrincipal extends JFrame {
 		pnTopologia.add(lblRedC);
 		
 		txtMaskC = new JTextField();
+		txtMaskC.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if((!Character.isDigit(c))||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE)) {
+					e.consume();
+				}
+			}
+		});
 		txtMaskC.setColumns(10);
 		txtMaskC.setBounds(365, 151, 33, 26);
 		pnTopologia.add(txtMaskC);
 		
 		txtRedC = new JTextField();
+		txtRedC.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if((!Character.isDigit(c)&&(c!='.'))||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE)) {
+					e.consume();
+				}
+			}
+		});
 		txtRedC.setColumns(10);
 		txtRedC.setBounds(244, 151, 109, 26);
 		pnTopologia.add(txtRedC);
 		
 		txtMaskB = new JTextField();
+		txtMaskB.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if((!Character.isDigit(c))||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE)) {
+					e.consume();
+				}
+			}
+		});
 		txtMaskB.setColumns(10);
 		txtMaskB.setBounds(516, 77, 33, 26);
 		pnTopologia.add(txtMaskB);
 		
 		txtRedB = new JTextField();
+		txtRedB.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if((!Character.isDigit(c)&&(c!='.'))||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE)) {
+					e.consume();
+				}
+			}
+		});
 		txtRedB.setColumns(10);
 		txtRedB.setBounds(395, 77, 109, 26);
 		pnTopologia.add(txtRedB);
@@ -346,6 +456,15 @@ public class FrmPrincipal extends JFrame {
 		pnTopologia.add(label);
 		
 		txtMaskA = new JTextField();
+		txtMaskA.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if((!Character.isDigit(c))||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE)) {
+					e.consume();
+				}
+			}
+		});
 		txtMaskA.setColumns(10);
 		txtMaskA.setBounds(192, 77, 33, 26);
 		pnTopologia.add(txtMaskA);
@@ -355,6 +474,15 @@ public class FrmPrincipal extends JFrame {
 		pnTopologia.add(lblRedA);
 		
 		txtRedA = new JTextField();
+		txtRedA.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if((!Character.isDigit(c)&&(c!='.'))||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE)) {
+					e.consume();
+				}
+			}
+		});
 		txtRedA.setBounds(71, 77, 109, 26);
 		pnTopologia.add(txtRedA);
 		txtRedA.setColumns(10);
