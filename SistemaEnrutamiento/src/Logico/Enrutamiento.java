@@ -77,7 +77,5 @@ public class Enrutamiento {
 	public void setTipoEnrutamiento(String tipoEnrutamiento) {
 		this.tipoEnrutamiento = tipoEnrutamiento;
 	}
-	
-
 
 }

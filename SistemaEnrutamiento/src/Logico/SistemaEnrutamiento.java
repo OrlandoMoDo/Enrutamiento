@@ -1,6 +1,7 @@
 package Logico;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class SistemaEnrutamiento {
 	
@@ -75,6 +76,74 @@ public class SistemaEnrutamiento {
 	public void modificarRuta(int posicion, Enrutamiento enrutamientoAux) {
 		misEnrutamientos.set(posicion-4, enrutamientoAux);
 	}
-
+	
+	public boolean validarIP(String IP, String Mascara) {
+		boolean valida=false;
+		boolean mask=false;
+		boolean direccion=false;
+		boolean red=false;
+		int numMask=Integer.parseInt(Mascara);
+		if((numMask>=8)&&(numMask<=30)) {
+			mask=true;
+		}else {
+			mask=false;
+		}
+		direccion = validarDireccion(IP);
+		if(direccion&&mask) {
+			red = validarRed(IP,numMask);
+		}
+		valida=mask&direccion&red;
+		return valida;
+	}
+	
+	public static boolean validarDireccion(String ipAddress) {
+	    boolean b1 = false;
+	    StringTokenizer t = new StringTokenizer(ipAddress, ".");
+	    int a = Integer.parseInt(t.nextToken());
+	    int b = Integer.parseInt(t.nextToken());
+	    int c = Integer.parseInt(t.nextToken());
+	    int d = Integer.parseInt(t.nextToken());
+	    if ((a >= 0 && a <= 255) && (b >= 0 && b <= 255)
+	        && (c >= 0 && c <= 255) && (d >= 0 && d <= 255))
+	      b1 = true;
+	    return b1;
+	  }
+	
+	public static boolean validarRed(String ipAddress,int Mask) {
+	    boolean valid = false;
+	    StringTokenizer t = new StringTokenizer(ipAddress, ".");
+	    int a = Integer.parseInt(t.nextToken());
+	    int b = Integer.parseInt(t.nextToken());
+	    int c = Integer.parseInt(t.nextToken());
+	    int d = Integer.parseInt(t.nextToken());
+	    int num=0;
+	    int red=0;
+	    if(Mask<16) {
+	    	num=16-Mask;
+	    	while((red<255)||(!valid)) {
+	    		if(b==red) {
+	    			valid=true;
+	    		}
+	    		red+=(int)Math.pow(2,num);
+	    	}
+	    }else if(Mask<24) {
+	    	num=24-Mask;
+	    	while((red<255)||(!valid)) {
+	    		if(c==red) {
+	    			valid=true;
+	    		}
+	    		red+=(int)Math.pow(2,num);
+	    	}
+	    }else {
+	    	num=32-Mask;
+	    	while((red<255)||(!valid)) {
+	    		if(d==red) {
+	    			valid=true;
+	    		}
+	    		red+=(int)Math.pow(2,num);
+	    	}
+	    }
+	    return valid;
+	  }
 
 }

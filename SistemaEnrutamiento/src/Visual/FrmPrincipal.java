@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Logico.Enrutamiento;
 import Logico.Red;
 import Logico.Router;
 import Logico.SistemaEnrutamiento;
@@ -64,7 +65,13 @@ public class FrmPrincipal extends JFrame {
 	private JLabel lblIpGatewayRedD;
 	private JLabel lblIpGatewayRedG;
 	private JButton btnSiguiente;
-
+	private boolean validarA;
+	private boolean validarB;
+	private boolean validarC;
+	private boolean validarD;
+	private boolean validarE;
+	private boolean validarF;
+	private boolean validarG;
 
 
 	/**
@@ -110,92 +117,106 @@ public class FrmPrincipal extends JFrame {
 		btnComprobar = new JButton("Comprobar");
 		btnComprobar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				validarA=SistemaEnrutamiento.getInstance().validarIP(txtRedA.getText(), txtMaskA.getText());
+				validarB=SistemaEnrutamiento.getInstance().validarIP(txtRedB.getText(), txtMaskB.getText());
+				validarC=SistemaEnrutamiento.getInstance().validarIP(txtRedC.getText(), txtMaskC.getText());
+				validarD=SistemaEnrutamiento.getInstance().validarIP(txtRedD.getText(), txtMaskD.getText());
+				validarE=SistemaEnrutamiento.getInstance().validarIP(txtRedE.getText(), txtMaskE.getText());
+				validarF=SistemaEnrutamiento.getInstance().validarIP(txtRedF.getText(), txtMaskF.getText());
+				validarG=SistemaEnrutamiento.getInstance().validarIP(txtRedG.getText(), txtMaskG.getText());
 				if(camposLlenos()) {
-					Router routerIngresar = new Router("R-2");
-					for(int i=0; i<4; i++) {
-						int ip;
-						switch (i) {
-						case 0:
-							ip = calcularIpGateway(txtRedA);
-							lblIpGatewayRedA.setText("."+ip);
-							lblIpGatewayRedA.setVisible(true);
-							routerIngresar.ingresarNextHop("."+ip);
-							routerIngresar.ingresarInterfaces("e0/0");
-							break;
-							
-						case 1:
-							ip = calcularIpGateway(txtRedC);
-							lblIpGatewayRedC.setText("."+ip);
-							lblIpGatewayRedC.setVisible(true);
-							routerIngresar.ingresarNextHop("."+ip);
-							routerIngresar.ingresarInterfaces("e0/2");
-							break;
-						
-						case 2:
-							ip = calcularIpGateway(txtRedD);
-							lblIpGatewayRedD.setText("."+ip);
-							lblIpGatewayRedD.setVisible(true);
-							routerIngresar.ingresarNextHop("."+ip);
-							routerIngresar.ingresarInterfaces("e0/3");
-							break;
-						
-						case 3:
-							ip = calcularIpGateway(txtRedG);
-							lblIpGatewayRedG.setText("."+ip);
-							lblIpGatewayRedG.setVisible(true);
-							routerIngresar.ingresarNextHop("."+ip);
-							routerIngresar.ingresarInterfaces("e0/1");
-							break;
-						}
-					}
-					txtRedA.setText(txtRedA.getText()+'.');
-					txtRedB.setText(txtRedB.getText()+'.');
-					txtRedC.setText(txtRedC.getText()+'.');
-					txtRedD.setText(txtRedD.getText()+'.');
-					txtRedE.setText(txtRedE.getText()+'.');
-					txtRedF.setText(txtRedF.getText()+'.');
-					txtRedG.setText(txtRedG.getText()+'.');
-					btnSiguiente.setEnabled(true);
-					ArrayList<Integer> octetos = new ArrayList<Integer>();
-					char[] chars = txtRedA.getText().toCharArray();
-					int mask;
-					for(int i=0; i<7; i++) {
-						mask=0;
-						String octeto = "";
-						octetos.clear();
-
-						switch (i) {
-							case 0: chars = txtRedA.getText().toCharArray(); mask=Integer.parseInt(txtMaskA.getText()); break;
-							case 1: chars = txtRedB.getText().toCharArray(); mask=Integer.parseInt(txtMaskB.getText()); break;
-							case 2: chars = txtRedC.getText().toCharArray(); mask=Integer.parseInt(txtMaskC.getText()); break;
-							case 3: chars = txtRedD.getText().toCharArray(); mask=Integer.parseInt(txtMaskD.getText()); break;
-							case 4: chars = txtRedE.getText().toCharArray(); mask=Integer.parseInt(txtMaskE.getText()); break;
-							case 5: chars = txtRedF.getText().toCharArray(); mask=Integer.parseInt(txtMaskF.getText()); break;
-							case 6: chars = txtRedG.getText().toCharArray(); mask=Integer.parseInt(txtMaskG.getText()); break;
-						}
-						for(char ch: chars) {
-							if((ch!='.')) {
-								octeto = octeto+ch;
-							}else {
-								int octetoInt = Integer.parseInt(octeto);
-								octetos.add(octetoInt);
-								octeto="";
+					if(!(txtRedA.getText().equals(txtRedB.getText())||txtRedA.getText().equals(txtRedC.getText())||txtRedA.getText().equals(txtRedD.getText())||txtRedA.getText().equals(txtRedE.getText())||txtRedA.getText().equals(txtRedF.getText())
+							||txtRedA.getText().equals(txtRedG.getText())||txtRedB.getText().equals(txtRedC.getText())||txtRedB.getText().equals(txtRedD.getText())||txtRedB.getText().equals(txtRedE.getText())||txtRedB.getText().equals(txtRedF.getText())
+							||txtRedB.getText().equals(txtRedG.getText())||txtRedC.getText().equals(txtRedD.getText())||txtRedC.getText().equals(txtRedE.getText())||txtRedC.getText().equals(txtRedF.getText())
+							||txtRedC.getText().equals(txtRedG.getText())||txtRedD.getText().equals(txtRedE.getText())||txtRedD.getText().equals(txtRedF.getText())||txtRedD.getText().equals(txtRedG.getText())
+							||txtRedE.getText().equals(txtRedF.getText())||txtRedE.getText().equals(txtRedG.getText())||txtRedF.getText().equals(txtRedG.getText()))) {
+						if(validarA&&validarB&&validarC&&validarD&&validarE&&validarF&&validarG) {
+							Router routerIngresar = new Router("R-2");
+							for(int i=0; i<4; i++) {
+								int ip;
+								switch (i) {
+								case 0:
+									ip = calcularIpGateway(txtRedA);
+									lblIpGatewayRedA.setText("."+ip);
+									lblIpGatewayRedA.setVisible(true);
+									routerIngresar.ingresarNextHop("."+ip);
+									routerIngresar.ingresarInterfaces("e0/0");
+									break;
+									
+								case 1:
+									ip = calcularIpGateway(txtRedC);
+									lblIpGatewayRedC.setText("."+ip);
+									lblIpGatewayRedC.setVisible(true);
+									routerIngresar.ingresarNextHop("."+ip);
+									routerIngresar.ingresarInterfaces("e0/2");
+									break;
+								
+								case 2:
+									ip = calcularIpGateway(txtRedD);
+									lblIpGatewayRedD.setText("."+ip);
+									lblIpGatewayRedD.setVisible(true);
+									routerIngresar.ingresarNextHop("."+ip);
+									routerIngresar.ingresarInterfaces("e0/3");
+									break;
+								
+								case 3:
+									ip = calcularIpGateway(txtRedG);
+									lblIpGatewayRedG.setText("."+ip);
+									lblIpGatewayRedG.setVisible(true);
+									routerIngresar.ingresarNextHop("."+ip);
+									routerIngresar.ingresarInterfaces("e0/1");
+									break;
+								}
 							}
+							txtRedA.setText(txtRedA.getText()+'.');
+							txtRedB.setText(txtRedB.getText()+'.');
+							txtRedC.setText(txtRedC.getText()+'.');
+							txtRedD.setText(txtRedD.getText()+'.');
+							txtRedE.setText(txtRedE.getText()+'.');
+							txtRedF.setText(txtRedF.getText()+'.');
+							txtRedG.setText(txtRedG.getText()+'.');
+							btnSiguiente.setEnabled(true);
+							ArrayList<Integer> octetos = new ArrayList<Integer>();
+							char[] chars = txtRedA.getText().toCharArray();
+							int mask;
+							for(int i=0; i<7; i++) {
+								mask=0;
+								String octeto = "";
+								octetos.clear();
+		
+								switch (i) {
+									case 0: chars = txtRedA.getText().toCharArray(); mask=Integer.parseInt(txtMaskA.getText()); break;
+									case 1: chars = txtRedB.getText().toCharArray(); mask=Integer.parseInt(txtMaskB.getText()); break;
+									case 2: chars = txtRedC.getText().toCharArray(); mask=Integer.parseInt(txtMaskC.getText()); break;
+									case 3: chars = txtRedD.getText().toCharArray(); mask=Integer.parseInt(txtMaskD.getText()); break;
+									case 4: chars = txtRedE.getText().toCharArray(); mask=Integer.parseInt(txtMaskE.getText()); break;
+									case 5: chars = txtRedF.getText().toCharArray(); mask=Integer.parseInt(txtMaskF.getText()); break;
+									case 6: chars = txtRedG.getText().toCharArray(); mask=Integer.parseInt(txtMaskG.getText()); break;
+								}
+								for(char ch: chars) {
+									if((ch!='.')) {
+										octeto = octeto+ch;
+									}else {
+										int octetoInt = Integer.parseInt(octeto);
+										octetos.add(octetoInt);
+										octeto="";
+									}
+								}
+								
+								Red redIngresar = new Red(octetos.get(0), octetos.get(1), octetos.get(2), octetos.get(3), mask);
+								switch (i) {
+									case 0: routerIngresar.ingresarRed(redIngresar); break;
+									case 2: routerIngresar.ingresarRed(redIngresar); break;
+									case 3: routerIngresar.ingresarRed(redIngresar); break;
+									case 6: routerIngresar.ingresarRed(redIngresar); break;
+								}
+								SistemaEnrutamiento.getInstance().ingresarRed(redIngresar);
+							}
+							SistemaEnrutamiento.getInstance().ingresarRouter(routerIngresar);
+						}else {
+							System.out.println("La IP no es valida");
 						}
-						
-						Red redIngresar = new Red(octetos.get(0), octetos.get(1), octetos.get(2), octetos.get(3), mask);
-						switch (i) {
-							case 0: routerIngresar.ingresarRed(redIngresar); break;
-							case 2: routerIngresar.ingresarRed(redIngresar); break;
-							case 3: routerIngresar.ingresarRed(redIngresar); break;
-							case 6: routerIngresar.ingresarRed(redIngresar); break;
-						}
-						SistemaEnrutamiento.getInstance().ingresarRed(redIngresar);
 					}
-					SistemaEnrutamiento.getInstance().ingresarRouter(routerIngresar);
-
-					
-					
 				}else {
 					JOptionPane.showMessageDialog(null, "Llene todos los campos");
 				}
