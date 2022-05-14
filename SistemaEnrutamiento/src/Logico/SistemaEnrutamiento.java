@@ -146,4 +146,17 @@ public class SistemaEnrutamiento {
 	    return valid;
 	  }
 
+	public ArrayList<Enrutamiento> rutasDireccion(String red) {
+		ArrayList<Enrutamiento> rutasDireccion = new ArrayList<Enrutamiento>();
+		for (int i = 0; i <SistemaEnrutamiento.getInstance().getMisEnrutamientos().size(); i++) {
+			if(SistemaEnrutamiento.getInstance().getMisEnrutamientos().get(i).getRedDestino().getDireccionIpMask().equalsIgnoreCase(red)) {
+				rutasDireccion.add(SistemaEnrutamiento.getInstance().getMisEnrutamientos().get(i));
+			}
+		}
+		
+		return rutasDireccion;
+		
+		
+	}
+
 }

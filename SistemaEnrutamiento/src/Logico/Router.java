@@ -2,6 +2,8 @@ package Logico;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 public class Router {
 	
 	private String nombreRuter;
@@ -77,6 +79,26 @@ public class Router {
 	public void ingresarInterfaces(String interfacesIngresar) {
 		
 		interfaces.add(interfacesIngresar);
+		
+	}
+	
+	public ArrayList<String> redesEnrutadas(){
+		ArrayList<String> misRedesEnrutadas = new ArrayList<String>();
+		int cantRedes = 1;
+		
+		for (int i = 0; i < SistemaEnrutamiento.getInstance().getMisRouters().get(0).getEnrutamientos().size(); i++) {
+			if(i==0) {
+				misRedesEnrutadas.add(SistemaEnrutamiento.getInstance().getMisRouters().get(0).getEnrutamientos().get(i).getRedDestino().getDireccionIpMask());
+			}else {
+				if(!misRedesEnrutadas.contains(SistemaEnrutamiento.getInstance().getMisRouters().get(0).getEnrutamientos().get(i).getRedDestino().getDireccionIpMask())) {
+					misRedesEnrutadas.add(SistemaEnrutamiento.getInstance().getMisRouters().get(0).getEnrutamientos().get(i).getRedDestino().getDireccionIpMask());
+				}
+
+			}
+			
+		}
+		return misRedesEnrutadas;
+		
 		
 	}
 
