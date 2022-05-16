@@ -125,11 +125,7 @@ public class FrmPrincipal extends JFrame {
 				validarF=SistemaEnrutamiento.getInstance().validarIP(txtRedF.getText(), txtMaskF.getText());
 				validarG=SistemaEnrutamiento.getInstance().validarIP(txtRedG.getText(), txtMaskG.getText());
 				if(camposLlenos()) {
-					if(!(txtRedA.getText().equals(txtRedB.getText())||txtRedA.getText().equals(txtRedC.getText())||txtRedA.getText().equals(txtRedD.getText())||txtRedA.getText().equals(txtRedE.getText())||txtRedA.getText().equals(txtRedF.getText())
-							||txtRedA.getText().equals(txtRedG.getText())||txtRedB.getText().equals(txtRedC.getText())||txtRedB.getText().equals(txtRedD.getText())||txtRedB.getText().equals(txtRedE.getText())||txtRedB.getText().equals(txtRedF.getText())
-							||txtRedB.getText().equals(txtRedG.getText())||txtRedC.getText().equals(txtRedD.getText())||txtRedC.getText().equals(txtRedE.getText())||txtRedC.getText().equals(txtRedF.getText())
-							||txtRedC.getText().equals(txtRedG.getText())||txtRedD.getText().equals(txtRedE.getText())||txtRedD.getText().equals(txtRedF.getText())||txtRedD.getText().equals(txtRedG.getText())
-							||txtRedE.getText().equals(txtRedF.getText())||txtRedE.getText().equals(txtRedG.getText())||txtRedF.getText().equals(txtRedG.getText()))) {
+					if(iguales()) {
 						if(validarA&&validarB&&validarC&&validarD&&validarE&&validarF&&validarG) {
 							Router routerIngresar = new Router("R-2");
 							for(int i=0; i<4; i++) {
@@ -216,6 +212,8 @@ public class FrmPrincipal extends JFrame {
 						}else {
 							System.out.println("La IP no es valida");
 						}
+					}else {
+						JOptionPane.showMessageDialog(null, "Hay redes que son iguales");
 					}
 				}else {
 					JOptionPane.showMessageDialog(null, "Llene todos los campos");
@@ -542,6 +540,7 @@ public class FrmPrincipal extends JFrame {
 					txtMaskF.setEnabled(true);
 					txtRedG.setEnabled(true);
 					txtMaskG.setEnabled(true);
+					btnSiguiente.setEnabled(false);
 				}
 			}
 		});
@@ -659,5 +658,53 @@ public class FrmPrincipal extends JFrame {
 		
 		return direccionIpInt;
 		
+	}
+	
+	private boolean iguales() {
+		boolean equa=true;
+		if(txtRedA.getText().equals(txtRedB.getText())) {
+			equa=false;
+		}else if(txtRedA.getText().equals(txtRedC.getText())) {
+			equa=false;
+		}else if(txtRedA.getText().equals(txtRedD.getText())) {
+			equa=false;
+		}else if(txtRedA.getText().equals(txtRedE.getText())) {
+			equa=false;
+		}else if(txtRedA.getText().equals(txtRedF.getText())) {
+			equa=false;
+		}else if(txtRedA.getText().equals(txtRedG.getText())) {
+			equa=false;
+		}else if(txtRedB.getText().equals(txtRedC.getText())) {
+			equa=false;
+		}else if(txtRedB.getText().equals(txtRedD.getText())) {
+			equa=false;
+		}else if(txtRedB.getText().equals(txtRedE.getText())) {
+			equa=false;
+		}else if(txtRedB.getText().equals(txtRedF.getText())) {
+			equa=false;
+		}else if(txtRedB.getText().equals(txtRedG.getText())) {
+			equa=false;
+		}else if(txtRedC.getText().equals(txtRedD.getText())) {
+			equa=false;
+		}else if(txtRedC.getText().equals(txtRedE.getText())) {
+			equa=false;
+		}else if(txtRedC.getText().equals(txtRedF.getText())) {
+			equa=false;
+		}else if(txtRedC.getText().equals(txtRedG.getText())) {
+			equa=false;
+		}else if(txtRedD.getText().equals(txtRedE.getText())) {
+			equa=false;
+		}else if(txtRedD.getText().equals(txtRedF.getText())) {
+			equa=false;
+		}else if(txtRedD.getText().equals(txtRedG.getText())) {
+			equa=false;
+		}else if(txtRedE.getText().equals(txtRedF.getText())) {
+			equa=false;
+		}else if(txtRedE.getText().equals(txtRedG.getText())) {
+			equa=false;
+		}else if(txtRedF.getText().equals(txtRedG.getText())) {
+			equa=false;
+		}
+		return equa;
 	}
 }
