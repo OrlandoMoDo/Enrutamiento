@@ -121,7 +121,7 @@ public class SistemaEnrutamiento {
 	    if(Mask<16) {
 	    	num=16-Mask;
 	    	while((red<255)||(!valid)) {
-	    		if(b==red) {
+	    		if(b==red&&c==0&&d==0) {
 	    			valid=true;
 	    		}
 	    		red+=(int)Math.pow(2,num);
@@ -129,7 +129,7 @@ public class SistemaEnrutamiento {
 	    }else if(Mask<24) {
 	    	num=24-Mask;
 	    	while((red<255)||(!valid)) {
-	    		if(c==red) {
+	    		if(c==red&&d==0) {
 	    			valid=true;
 	    		}
 	    		red+=(int)Math.pow(2,num);
