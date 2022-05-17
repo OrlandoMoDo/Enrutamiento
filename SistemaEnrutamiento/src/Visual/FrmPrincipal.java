@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Image;
+import java.awt.TextComponent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -212,8 +213,6 @@ public class FrmPrincipal extends JFrame {
 						}else {
 							System.out.println("La IP no es valida");
 						}
-					}else {
-						JOptionPane.showMessageDialog(null, "Hay redes que son iguales");
 					}
 				}else {
 					JOptionPane.showMessageDialog(null, "Llene todos los campos");
@@ -664,46 +663,67 @@ public class FrmPrincipal extends JFrame {
 		boolean equa=true;
 		if(txtRedA.getText().equals(txtRedB.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes A y B son iguales");
 		}else if(txtRedA.getText().equals(txtRedC.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes A y C son iguales");
 		}else if(txtRedA.getText().equals(txtRedD.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes A y D son iguales");
 		}else if(txtRedA.getText().equals(txtRedE.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes A y E son iguales");
 		}else if(txtRedA.getText().equals(txtRedF.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes A y F son iguales");
 		}else if(txtRedA.getText().equals(txtRedG.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes A y G son iguales");
 		}else if(txtRedB.getText().equals(txtRedC.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes B y C son iguales");
 		}else if(txtRedB.getText().equals(txtRedD.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes B y D son iguales");
 		}else if(txtRedB.getText().equals(txtRedE.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes B y E son iguales");
 		}else if(txtRedB.getText().equals(txtRedF.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes B y F son iguales");
 		}else if(txtRedB.getText().equals(txtRedG.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes B y G son iguales");
 		}else if(txtRedC.getText().equals(txtRedD.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes C y D son iguales");
 		}else if(txtRedC.getText().equals(txtRedE.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes C y E son iguales");
 		}else if(txtRedC.getText().equals(txtRedF.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes C y F son iguales");
 		}else if(txtRedC.getText().equals(txtRedG.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes C y G son iguales");
 		}else if(txtRedD.getText().equals(txtRedE.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes D y E son iguales");
 		}else if(txtRedD.getText().equals(txtRedF.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes D y F son iguales");
 		}else if(txtRedD.getText().equals(txtRedG.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes D y G son iguales");
 		}else if(txtRedE.getText().equals(txtRedF.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes E y F son iguales");
 		}else if(txtRedE.getText().equals(txtRedG.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes E y G son iguales");
 		}else if(txtRedF.getText().equals(txtRedG.getText())) {
 			equa=false;
+			JOptionPane.showMessageDialog(null, "Las redes F y G son iguales");
 		}
 		return equa;
 	}
