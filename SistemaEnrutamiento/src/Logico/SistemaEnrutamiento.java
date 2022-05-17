@@ -81,7 +81,6 @@ public class SistemaEnrutamiento {
 		boolean valida=false;
 		boolean mask=false;
 		boolean direccion=false;
-		boolean red=false;
 		int numMask=Integer.parseInt(Mascara);
 		if((numMask>=8)&&(numMask<=30)) {
 			mask=true;
@@ -89,10 +88,7 @@ public class SistemaEnrutamiento {
 			mask=false;
 		}
 		direccion = validarDireccion(IP);
-		if(direccion&&mask) {
-			red = validarRed(IP,numMask);
-		}
-		valida=mask&direccion&red;
+		valida=mask&direccion;
 		return valida;
 	}
 	
@@ -109,28 +105,49 @@ public class SistemaEnrutamiento {
 	    return b1;
 	  }
 	
-	public static boolean validarRed(String ipAddress,int Mask) {
-	    boolean valid = false;
+	public String validarRed(String ipAddress,String Mascara) {
+	    String newRed = "";
+	    boolean valid=false;
+	    int Mask=Integer.parseInt(Mascara);
 	    StringTokenizer t = new StringTokenizer(ipAddress, ".");
 	    int a = Integer.parseInt(t.nextToken());
 	    int b = Integer.parseInt(t.nextToken());
 	    int c = Integer.parseInt(t.nextToken());
 	    int d = Integer.parseInt(t.nextToken());
 	    int num=0;
+	    int num2=0;
 	    int red=0;
 	    if(Mask<16) {
 	    	num=16-Mask;
 	    	while((red<255)||(!valid)) {
-	    		if(b==red&&c==0&&d==0) {
+	    		if(b==red) {
 	    			valid=true;
+	    			c=0;
+	    			d=0;
+	    		}
+	    		if(b<red) {
+	    			num2=red;
+	    		}else if(b>red){
+	    			b=num2;
+	    			valid=true;
+	    			c=0;
+	    			d=0;
 	    		}
 	    		red+=(int)Math.pow(2,num);
 	    	}
 	    }else if(Mask<24) {
 	    	num=24-Mask;
 	    	while((red<255)||(!valid)) {
-	    		if(c==red&&d==0) {
+	    		if(c==red) {
 	    			valid=true;
+	    			d=0;
+	    		}
+	    		if(c<red) {
+	    			num2=red;
+	    		}else if(c>red){
+	    			c=num2;
+	    			valid=true;
+	    			d=0;
 	    		}
 	    		red+=(int)Math.pow(2,num);
 	    	}
@@ -140,10 +157,21 @@ public class SistemaEnrutamiento {
 	    		if(d==red) {
 	    			valid=true;
 	    		}
+	    		if(d<red) {
+	    			num2=red;
+	    		}else if(d>red){
+	    			d=num2;
+	    			valid=true;
+	    		}
 	    		red+=(int)Math.pow(2,num);
 	    	}
 	    }
-	    return valid;
+	    String na = Integer.toString(a);
+	    String nb = Integer.toString(b);
+	    String nc = Integer.toString(c);
+	    String nd = Integer.toString(d);
+	    newRed = na+"."+nb+"."+nc+"."+nd; 
+	    return newRed;
 	  }
 
 	public ArrayList<Enrutamiento> rutasDireccion(String red) {

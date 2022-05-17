@@ -126,8 +126,15 @@ public class FrmPrincipal extends JFrame {
 				validarF=SistemaEnrutamiento.getInstance().validarIP(txtRedF.getText(), txtMaskF.getText());
 				validarG=SistemaEnrutamiento.getInstance().validarIP(txtRedG.getText(), txtMaskG.getText());
 				if(camposLlenos()) {
-					if(iguales()) {
-						if(validarA&&validarB&&validarC&&validarD&&validarE&&validarF&&validarG) {
+					if(validarA&&validarB&&validarC&&validarD&&validarE&&validarF&&validarG) {
+						txtRedA.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedA.getText(), txtMaskA.getText()));
+						txtRedB.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedB.getText(), txtMaskB.getText()));
+						txtRedC.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedC.getText(), txtMaskC.getText()));
+						txtRedD.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedD.getText(), txtMaskD.getText()));
+						txtRedE.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedE.getText(), txtMaskE.getText()));
+						txtRedF.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedF.getText(), txtMaskF.getText()));
+						txtRedG.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedG.getText(), txtMaskG.getText()));
+						if(iguales()) {
 							Router routerIngresar = new Router("R-2");
 							for(int i=0; i<4; i++) {
 								int ip;
@@ -210,9 +217,9 @@ public class FrmPrincipal extends JFrame {
 								SistemaEnrutamiento.getInstance().ingresarRed(redIngresar);
 							}
 							SistemaEnrutamiento.getInstance().ingresarRouter(routerIngresar);
-						}else {
-							System.out.println("La IP no es valida");
 						}
+					}else {
+						System.out.println("La IP no es valida");
 					}
 				}else {
 					JOptionPane.showMessageDialog(null, "Llene todos los campos");
