@@ -247,10 +247,10 @@ public class FrmEnrutamiento extends JDialog {
 			lblNextHop.setBounds(15, 118, 101, 20);
 			pnRuta.add(lblNextHop);
 			
-			String nextHopArray[] = new String[4];
-			for (int i = 0; i < 4; i++) {
-				nextHopArray[i] = SistemaEnrutamiento.getInstance().getMisRouters().get(0).getNextHops().get(i);
-			}
+			String nextHopArray[] = {""+SistemaEnrutamiento.getInstance().getMisRedes().get(0).getPrimerOcteto()+"."+SistemaEnrutamiento.getInstance().getMisRedes().get(0).getSegundoOcteto()+"."+SistemaEnrutamiento.getInstance().getMisRedes().get(0).getTercerOcteto()+SistemaEnrutamiento.getInstance().getMisRouters().get(0).getNextHops().get(0),
+					""+SistemaEnrutamiento.getInstance().getMisRedes().get(2).getPrimerOcteto()+"."+SistemaEnrutamiento.getInstance().getMisRedes().get(2).getSegundoOcteto()+"."+SistemaEnrutamiento.getInstance().getMisRedes().get(2).getTercerOcteto()+SistemaEnrutamiento.getInstance().getMisRouters().get(0).getNextHops().get(1),
+					""+SistemaEnrutamiento.getInstance().getMisRedes().get(3).getPrimerOcteto()+"."+SistemaEnrutamiento.getInstance().getMisRedes().get(3).getSegundoOcteto()+"."+SistemaEnrutamiento.getInstance().getMisRedes().get(3).getTercerOcteto()+SistemaEnrutamiento.getInstance().getMisRouters().get(0).getNextHops().get(2),
+					""+SistemaEnrutamiento.getInstance().getMisRedes().get(6).getPrimerOcteto()+"."+SistemaEnrutamiento.getInstance().getMisRedes().get(6).getSegundoOcteto()+"."+SistemaEnrutamiento.getInstance().getMisRedes().get(6).getTercerOcteto()+SistemaEnrutamiento.getInstance().getMisRouters().get(0).getNextHops().get(3)};
 			cbxNextHop = new JComboBox(nextHopArray);
 			cbxNextHop.setBounds(125, 115, 187, 26);
 			pnRuta.add(cbxNextHop);

@@ -668,67 +668,67 @@ public class FrmPrincipal extends JFrame {
 	
 	private boolean iguales() {
 		boolean equa=true;
-		if(txtRedA.getText().equals(txtRedB.getText())) {
+		if(txtRedA.getText().equals(txtRedB.getText())&&txtMaskA.getText().equals(txtMaskB.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes A y B son iguales");
-		}else if(txtRedA.getText().equals(txtRedC.getText())) {
+		}else if(txtRedA.getText().equals(txtRedC.getText())&&txtMaskA.getText().equals(txtMaskC.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes A y C son iguales");
-		}else if(txtRedA.getText().equals(txtRedD.getText())) {
+		}else if(txtRedA.getText().equals(txtRedD.getText())&&txtMaskA.getText().equals(txtMaskD.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes A y D son iguales");
-		}else if(txtRedA.getText().equals(txtRedE.getText())) {
+		}else if(txtRedA.getText().equals(txtRedE.getText())&&txtMaskA.getText().equals(txtMaskE.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes A y E son iguales");
-		}else if(txtRedA.getText().equals(txtRedF.getText())) {
+		}else if(txtRedA.getText().equals(txtRedF.getText())&&txtMaskA.getText().equals(txtMaskF.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes A y F son iguales");
-		}else if(txtRedA.getText().equals(txtRedG.getText())) {
+		}else if(txtRedA.getText().equals(txtRedG.getText())&&txtMaskA.getText().equals(txtMaskG.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes A y G son iguales");
-		}else if(txtRedB.getText().equals(txtRedC.getText())) {
+		}else if(txtRedB.getText().equals(txtRedC.getText())&&txtMaskB.getText().equals(txtMaskC.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes B y C son iguales");
-		}else if(txtRedB.getText().equals(txtRedD.getText())) {
+		}else if(txtRedB.getText().equals(txtRedD.getText())&&txtMaskB.getText().equals(txtMaskD.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes B y D son iguales");
-		}else if(txtRedB.getText().equals(txtRedE.getText())) {
+		}else if(txtRedB.getText().equals(txtRedE.getText())&&txtMaskB.getText().equals(txtMaskE.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes B y E son iguales");
-		}else if(txtRedB.getText().equals(txtRedF.getText())) {
+		}else if(txtRedB.getText().equals(txtRedF.getText())&&txtMaskB.getText().equals(txtMaskF.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes B y F son iguales");
-		}else if(txtRedB.getText().equals(txtRedG.getText())) {
+		}else if(txtRedB.getText().equals(txtRedG.getText())&&txtMaskB.getText().equals(txtMaskG.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes B y G son iguales");
-		}else if(txtRedC.getText().equals(txtRedD.getText())) {
+		}else if(txtRedC.getText().equals(txtRedD.getText())&&txtMaskC.getText().equals(txtMaskD.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes C y D son iguales");
-		}else if(txtRedC.getText().equals(txtRedE.getText())) {
+		}else if(txtRedC.getText().equals(txtRedE.getText())&&txtMaskC.getText().equals(txtMaskE.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes C y E son iguales");
-		}else if(txtRedC.getText().equals(txtRedF.getText())) {
+		}else if(txtRedC.getText().equals(txtRedF.getText())&&txtMaskC.getText().equals(txtMaskF.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes C y F son iguales");
-		}else if(txtRedC.getText().equals(txtRedG.getText())) {
+		}else if(txtRedC.getText().equals(txtRedG.getText())&&txtMaskC.getText().equals(txtMaskG.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes C y G son iguales");
-		}else if(txtRedD.getText().equals(txtRedE.getText())) {
+		}else if(txtRedD.getText().equals(txtRedE.getText())&&txtMaskD.getText().equals(txtMaskE.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes D y E son iguales");
-		}else if(txtRedD.getText().equals(txtRedF.getText())) {
+		}else if(txtRedD.getText().equals(txtRedF.getText())&&txtMaskD.getText().equals(txtMaskF.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes D y F son iguales");
-		}else if(txtRedD.getText().equals(txtRedG.getText())) {
+		}else if(txtRedD.getText().equals(txtRedG.getText())&&txtMaskD.getText().equals(txtMaskG.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes D y G son iguales");
-		}else if(txtRedE.getText().equals(txtRedF.getText())) {
+		}else if(txtRedE.getText().equals(txtRedF.getText())&&txtMaskE.getText().equals(txtMaskF.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes E y F son iguales");
-		}else if(txtRedE.getText().equals(txtRedG.getText())) {
+		}else if(txtRedE.getText().equals(txtRedG.getText())&&txtMaskE.getText().equals(txtMaskG.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes E y G son iguales");
-		}else if(txtRedF.getText().equals(txtRedG.getText())) {
+		}else if(txtRedF.getText().equals(txtRedG.getText())&&txtMaskF.getText().equals(txtMaskG.getText())) {
 			equa=false;
 			JOptionPane.showMessageDialog(null, "Las redes F y G son iguales");
 		}
