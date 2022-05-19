@@ -114,7 +114,7 @@ public class FrmPrincipal extends JFrame {
 		pnBody.setBackground(Color.LIGHT_GRAY);
 		contentPane.add(pnBody, BorderLayout.CENTER);
 		pnBody.setLayout(null);
-		
+				
 		btnComprobar = new JButton("Comprobar");
 		btnComprobar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -125,15 +125,78 @@ public class FrmPrincipal extends JFrame {
 				validarE=SistemaEnrutamiento.getInstance().validarIP(txtRedE.getText(), txtMaskE.getText());
 				validarF=SistemaEnrutamiento.getInstance().validarIP(txtRedF.getText(), txtMaskF.getText());
 				validarG=SistemaEnrutamiento.getInstance().validarIP(txtRedG.getText(), txtMaskG.getText());
+				
+				ArrayList<Integer> octetos1 = new ArrayList<Integer>();
+				char[] chars1 = txtRedA.getText().toCharArray();
+				int mask1;
+				for(int i=0; i<7; i++) {
+					mask1=0;
+					String octeto = "";
+					octetos1.clear();
+					String redA = (txtRedA.getText()+".");
+					String redB = (txtRedB.getText()+".");
+					String redC = (txtRedC.getText()+".");
+					String redD = (txtRedD.getText()+".");
+					String redE = (txtRedE.getText()+".");
+					String redF = (txtRedF.getText()+".");
+					String redG = (txtRedG.getText()+".");
+					switch (i) {
+						case 0: chars1 = redA.toCharArray(); mask1=Integer.parseInt(txtMaskA.getText()); break;
+						case 1: chars1 = redB.toCharArray(); mask1=Integer.parseInt(txtMaskB.getText()); break;
+						case 2: chars1 = redC.toCharArray(); mask1=Integer.parseInt(txtMaskC.getText()); break;
+						case 3: chars1 = redD.toCharArray(); mask1=Integer.parseInt(txtMaskD.getText()); break;
+						case 4: chars1 = redE.toCharArray(); mask1=Integer.parseInt(txtMaskE.getText()); break;
+						case 5: chars1 = redF.toCharArray(); mask1=Integer.parseInt(txtMaskF.getText()); break;
+						case 6: chars1 = redG.toCharArray(); mask1=Integer.parseInt(txtMaskG.getText()); break;
+					}
+					for(char ch: chars1) {
+						if((ch!='.')) {
+							octeto = octeto+ch;
+						}else {
+							int octetoInt = Integer.parseInt(octeto);
+							octetos1.add(octetoInt);
+							octeto="";
+						}
+					}
+					
+					Red redIngresar = new Red(octetos1.get(0), octetos1.get(1), octetos1.get(2), octetos1.get(3), mask1);
+					SistemaEnrutamiento.getInstance().ingresarRed(redIngresar);
+				}
+				
 				if(camposLlenos()) {
 					if(validarA&&validarB&&validarC&&validarD&&validarE&&validarF&&validarG) {
-						txtRedA.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedA.getText(), txtMaskA.getText()));
-						txtRedB.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedB.getText(), txtMaskB.getText()));
-						txtRedC.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedC.getText(), txtMaskC.getText()));
-						txtRedD.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedD.getText(), txtMaskD.getText()));
-						txtRedE.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedE.getText(), txtMaskE.getText()));
-						txtRedF.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedF.getText(), txtMaskF.getText()));
-						txtRedG.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedG.getText(), txtMaskG.getText()));
+//						txtRedA.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedA.getText(), txtMaskA.getText()));
+//						txtRedB.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedB.getText(), txtMaskB.getText()));
+//						txtRedC.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedC.getText(), txtMaskC.getText()));
+//						txtRedD.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedD.getText(), txtMaskD.getText()));
+//						txtRedE.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedE.getText(), txtMaskE.getText()));
+//						txtRedF.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedF.getText(), txtMaskF.getText()));
+//						txtRedG.setText(SistemaEnrutamiento.getInstance().validarRed(txtRedG.getText(), txtMaskG.getText()));
+						
+						JOptionPane.showMessageDialog(null, SistemaEnrutamiento.getInstance().buscarRedAux(txtRedA.getText(), txtMaskA.getText()).
+								direccionRed(SistemaEnrutamiento.getInstance().buscarRedAux(txtRedA.getText(), txtMaskA.getText())));
+						txtRedA.setText(SistemaEnrutamiento.getInstance().buscarRedAux(txtRedA.getText(), txtMaskA.getText()).
+								direccionRed(SistemaEnrutamiento.getInstance().buscarRedAux(txtRedA.getText(), txtMaskA.getText())));
+						
+						txtRedB.setText(SistemaEnrutamiento.getInstance().buscarRedAux(txtRedB.getText(), txtMaskB.getText()).
+								direccionRed(SistemaEnrutamiento.getInstance().buscarRedAux(txtRedB.getText(), txtMaskB.getText())));						
+						
+						txtRedC.setText(SistemaEnrutamiento.getInstance().buscarRedAux(txtRedC.getText(), txtMaskC.getText()).
+								direccionRed(SistemaEnrutamiento.getInstance().buscarRedAux(txtRedC.getText(), txtMaskC.getText())));
+						
+						txtRedD.setText(SistemaEnrutamiento.getInstance().buscarRedAux(txtRedD.getText(), txtMaskD.getText()).
+								direccionRed(SistemaEnrutamiento.getInstance().buscarRedAux(txtRedD.getText(), txtMaskD.getText())));
+						
+						txtRedE.setText(SistemaEnrutamiento.getInstance().buscarRedAux(txtRedE.getText(), txtMaskE.getText()).
+								direccionRed(SistemaEnrutamiento.getInstance().buscarRedAux(txtRedE.getText(), txtMaskE.getText())));
+						
+						txtRedF.setText(SistemaEnrutamiento.getInstance().buscarRedAux(txtRedF.getText(), txtMaskF.getText()).
+								direccionRed(SistemaEnrutamiento.getInstance().buscarRedAux(txtRedF.getText(), txtMaskF.getText())));
+						
+						txtRedG.setText(SistemaEnrutamiento.getInstance().buscarRedAux(txtRedG.getText(), txtMaskG.getText()).
+								direccionRed(SistemaEnrutamiento.getInstance().buscarRedAux(txtRedG.getText(), txtMaskG.getText())));
+						SistemaEnrutamiento.getInstance().getMisRedes().clear();
+
 						if(iguales()) {
 							Router routerIngresar = new Router("R-2");
 							for(int i=0; i<4; i++) {
@@ -576,13 +639,29 @@ public class FrmPrincipal extends JFrame {
 		pnBody.add(btnSiguiente);
 		
 		inicio();
+		probando();
 		
 		
 	}
-
+	
+	public void probando() {
+		txtRedA.setText("10.0.0.2");
+		txtRedB.setText("10.0.0.4");
+		txtRedC.setText("10.0.0.9");
+		txtRedD.setText("10.0.0.13");
+		txtRedE.setText("10.0.0.16");
+		txtRedF.setText("10.0.0.23");
+		txtRedG.setText("10.0.0.26");
+		txtMaskA.setText("30");
+		txtMaskB.setText("30");
+		txtMaskC.setText("30");
+		txtMaskD.setText("30");
+		txtMaskE.setText("30");
+		txtMaskF.setText("30");
+		txtMaskG.setText("30");
+	}
+	
 	private void inicio() {
-		
-		btnComprobar.setEnabled(false);
 		lblIpGatewayRedA.setVisible(false);
 		lblIpGatewayRedC.setVisible(false);
 		lblIpGatewayRedD.setVisible(false);
@@ -642,7 +721,7 @@ public class FrmPrincipal extends JFrame {
 		
 		int cantPuntos = 0;
 		int aux = 0;
-		String redCalcular = red.getText();
+		String redCalcular = red.getText()+"";
 		String direccionIp ="";
 		int direccionIpInt;
 		

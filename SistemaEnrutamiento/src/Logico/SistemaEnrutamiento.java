@@ -173,6 +173,34 @@ public class SistemaEnrutamiento {
 	    newRed = na+"."+nb+"."+nc+"."+nd; 
 	    return newRed;
 	  }
+	
+	public String direccionRed(Red ip) {
+		
+		String aux = ip.direccionRed(ip);
+		
+		
+		return aux;
+		
+		
+	}
+	
+	public Red buscarRedAux(String ip, String mask) {
+		int i=0;
+		boolean encontrado = false;
+		Red redAux = null;
+		
+		while (i<misRedes.size() && !encontrado) {
+			
+			if(misRedes.get(i).getDireccionIpMask().equalsIgnoreCase(ip+"/"+mask)) {
+				encontrado = true;
+				redAux = misRedes.get(i);
+			}
+			i++;
+		}
+		
+		return redAux;
+		
+	}
 
 	public ArrayList<Enrutamiento> rutasDireccion(String red) {
 		ArrayList<Enrutamiento> rutasDireccion = new ArrayList<Enrutamiento>();
@@ -184,6 +212,44 @@ public class SistemaEnrutamiento {
 		
 		return rutasDireccion;
 		
+		
+	}
+	
+
+	
+	public int mascaraMayor(ArrayList<Enrutamiento> enrutamientosDireccion) {
+		int aux = enrutamientosDireccion.get(0).getRedDestino().getMascara();
+		
+		for (int i = 1; i < enrutamientosDireccion.size(); i++) {
+			if(enrutamientosDireccion.get(i).getRedDestino().getMascara()>aux) {
+				aux=enrutamientosDireccion.get(i).getRedDestino().getMascara();
+			}
+		}
+		return aux;
+		
+	}
+	
+	public int distanciaADministrativaMenor(ArrayList<Enrutamiento> enrutamientosDireccion) {
+		int aux = (int) (enrutamientosDireccion.get(0).getDistanciaAdministrativa());
+		
+		for (int i = 1; i < enrutamientosDireccion.size(); i++) {
+			if(enrutamientosDireccion.get(i).getDistanciaAdministrativa()<aux) {
+				aux=(int) enrutamientosDireccion.get(i).getDistanciaAdministrativa();
+			}
+		}
+		return aux;
+		
+	}
+	
+	public int metricaMenor(ArrayList<Enrutamiento> enrutamientosDireccion) {
+		int aux = (int) (enrutamientosDireccion.get(0).getMetrica());
+		
+		for (int i = 1; i < enrutamientosDireccion.size(); i++) {
+			if(enrutamientosDireccion.get(i).getMetrica()<aux) {
+				aux=(int) enrutamientosDireccion.get(i).getMetrica();
+			}
+		}
+		return aux;
 		
 	}
 

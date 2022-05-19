@@ -521,37 +521,60 @@ public class FrmEnrutamiento extends JDialog {
 		}
 	}
 	
-	public void calcularMejorRuta() {
-		ArrayList<Enrutamiento> enrutamientosDireccion = SistemaEnrutamiento.getInstance().rutasDireccion(cbxRedDestino.getSelectedItem().toString());
-		String mejorRuta = "..";
-		JOptionPane.showMessageDialog(null, SistemaEnrutamiento.getInstance().rutasDireccion(cbxRedDestino.getSelectedItem().toString()).size());
-		for (int i = 0; i < enrutamientosDireccion.size(); i++) {
-			if(i!=0) {
-				if(enrutamientosDireccion.get(i).getRedDestino().getMascara()>enrutamientosDireccion.get(i-1).getRedDestino().getMascara()) {
-					
-					mejorRuta = "La mejor ruta es por la via: " +enrutamientosDireccion.get(i).getNextHop();
-				
-				}else if( (enrutamientosDireccion.get(i).getDistanciaAdministrativa() < enrutamientosDireccion.get(i-1).getDistanciaAdministrativa()) &&  
-						enrutamientosDireccion.get(i).getRedDestino().getMascara()==enrutamientosDireccion.get(i-1).getRedDestino().getMascara()) {
-					
-					mejorRuta = "La mejor ruta es por la via: " +enrutamientosDireccion.get(i).getNextHop();
-				
-				}else if(enrutamientosDireccion.get(i).getMetrica() < enrutamientosDireccion.get(i-1).getMetrica()
-						&& enrutamientosDireccion.get(i).getDistanciaAdministrativa() == enrutamientosDireccion.get(i-1).getDistanciaAdministrativa()) {
-					
-					mejorRuta = "La mejor ruta es por la via: " +enrutamientosDireccion.get(i).getNextHop();
-				
-				}else if(enrutamientosDireccion.get(i).getMetrica() == enrutamientosDireccion.get(i-1).getMetrica()){
-				mejorRuta = "La mejor ruta es por la via: " +enrutamientosDireccion.get(i).getNextHop()+
-						" y por la via "+enrutamientosDireccion.get(i-i).getNextHop();
-				}
-			}else {
-				mejorRuta = "La mejor ruta es por la via: " +enrutamientosDireccion.get(i).getNextHop();
-
+	//AVISO: MODIFICADO POR IVAN
+		public void calcularMejorRuta() {
+			ArrayList<Enrutamiento> enrutamientosDireccion = SistemaEnrutamiento.getInstance().rutasDireccion(cbxRedDestino.getSelectedItem().toString());
+			String mejorRuta = "..";
+			ArrayList<Enrutamiento> mejoresEnrutamientos = new ArrayList<Enrutamiento>();
+			ArrayList<Enrutamiento> mejorLPM = new ArrayList<Enrutamiento>();
+			ArrayList<Enrutamiento> mejorDistanciaAdministrativa = new ArrayList<Enrutamiento>();
+			
+			int mascaraMayor = SistemaEnrutamiento.getInstance().mascaraMayor(enrutamientosDireccion);
+			System.out.println(mascaraMayor);
+//			JOptionPane.showMessageDialog(null, SistemaEnrutamiento.getInstance().rutasDireccion(cbxRedDestino.getSelectedItem().toString()).size());
+			for (int i = 0; i < enrutamientosDireccion.size(); i++) {
+				if(enrutamientosDireccion.get(i).getRedDestino().getMascara()==mascaraMayor) {
+					mejorLPM.add(enrutamientosDireccion.get(i));
+				}				
 			}
-		}
-		lblMejorRuta.setText(mejorRuta);
-		
+			
+			if(mejorLPM.size()==1) {
+				mejoresEnrutamientos.add(mejorLPM.get(0));
+			}else {
+				int menorAD=SistemaEnrutamiento.getInstance().distanciaADministrativaMenor(mejorLPM);
+				for (int i = 0; i < mejorLPM.size(); i++) {
+					if(mejorLPM.get(i).getDistanciaAdministrativa()==menorAD) {
+						mejorDistanciaAdministrativa.add(mejorLPM.get(i));
+					}				
+				}				
+			}
+			
+			if(mejorDistanciaAdministrativa.size()==1) {
+				mejoresEnrutamientos.add(mejorDistanciaAdministrativa.get(0));
+			}else if(mejorDistanciaAdministrativa.size()>1){
+				int menorMetrica=SistemaEnrutamiento.getInstance().distanciaADministrativaMenor(mejorDistanciaAdministrativa);
+				for (int i = 0; i < mejorDistanciaAdministrativa.size(); i++) {
+					if(mejorDistanciaAdministrativa.get(i).getMetrica()==menorMetrica) {
+						mejoresEnrutamientos.add(mejorDistanciaAdministrativa.get(i));
+					}				
+				}				
+			}
+			
+			
+			mejorRuta = "Las mejores rutas son por las vias: ";
+			for (int i = 0; i < mejoresEnrutamientos.size(); i++) {
+				if(mejoresEnrutamientos.size()==1) {
+					mejorRuta = "La mejor ruta es por la via: " + mejoresEnrutamientos.get(0).getNextHop();
+				}else {
+					mejorRuta = mejorRuta+mejoresEnrutamientos.get(i).getNextHop()+" ";
+				}
+			}
+			for (int i = 0; i < mejoresEnrutamientos.size(); i++) {
+				System.out.println(mejoresEnrutamientos.get(i).getNextHop());
+			}
+			
+			lblMejorRuta.setText(mejorRuta);
+			
 	}
 }
 
